@@ -20,7 +20,7 @@ export default class RecentSearches {
   }
 
   render(recentSearches = []) {
-    this.container.innerHTML = ` <div class="col-6 bg-dark p-4">
+    this.container.innerHTML = ` <div id="1" class="col-6 bg-dark p-4">
     <h4 class="text-warning">Recent searches</h4>
     ${this.searchesToHTML(recentSearches)}
 </div>`;
