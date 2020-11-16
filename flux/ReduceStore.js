@@ -1,4 +1,4 @@
-export class ReduceStore {
+export default class ReduceStore {
   constructor() {
     this._listeners = [];
     this.state = this.setInitialState();
