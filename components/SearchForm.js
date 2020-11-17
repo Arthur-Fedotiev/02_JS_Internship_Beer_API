@@ -3,28 +3,33 @@ export default class SearchForm {
     this.container = container;
   }
 
-  getHeight() {
-    return this.container.offsetHeight;
+  errorMessageToHTML(isFieldEmpty) {
+    return isFieldEmpty
+      ? `<div class="alert alert-danger mt-2" role="alert">
+    Ya wanna get some <a href="#" class="alert-link">proper drink</a>, ain't ya?
+  </div>`
+      : "";
   }
 
-  render(el) {
-    this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0">
+  render(err) {
+    const isFieldEmpty = !!err["searchQuery"];
+    this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0 d-flex justify-content-between">
         <div class="input-group">
           <input
             name="searchInput"
             id="searchInput"
-            class="form-control mr-0"
+            class="form-control mr-0 ${isFieldEmpty ? "alert-warning" : ""}"
             type="search"
-            placeholder="Search"
+            placeholder="${isFieldEmpty ? `${err["searchQuery"]}` : "Search"}"
           />
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
           <i  id="searchIcon" class="fas fa-search text-grey" aria-hidden="true"></i>
           </button>
           </div>
-        </div>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="button">
                     Favourites
                   </button>
-      </form>`;
+      </form>
+      ${this.errorMessageToHTML(isFieldEmpty)}`;
   }
 }

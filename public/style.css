@@ -1,26 +1,9 @@
+#recentSearches {
+  display: block;
+}
+
 .beer-card-img {
   widows: 200px;
   height: 250px;
   object-fit: contain;
-}
-
-.ellipsis1 {
-  text-overflow: ellipsis;
-
-  /* Required for text-overflow to do anything */
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.overflow1 {
-  width: 10em;
-  height: 100%;
-  outline: 1px solid #000;
-  margin: 0 0 2em 0;
-
-  /**
-     * Required properties to achieve text-overflow
-     */
-  white-space: nowrap;
-  overflow: hidden;
 }

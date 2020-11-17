@@ -4,17 +4,8 @@ export default class RecentSearches {
     this.setDefaultStyle();
   }
 
-  getHeight() {
-    return this.container.offsetHeight;
-  }
-
   setDefaultStyle() {
     this.container.style.display = "block";
-  }
-
-  toggle() {
-    const isVisible = this.container.style.display === "block";
-    this.container.style.display = isVisible ? "none" : "block";
   }
 
   searchesToHTML(recentSearches) {
