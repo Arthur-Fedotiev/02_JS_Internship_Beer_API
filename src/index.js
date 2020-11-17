@@ -6,7 +6,7 @@ import {
 import ReduceStore from "../flux/ReduceStore.js";
 import Reducer from "./Reducer.js";
 import { addNewItems, addNewSearchItem } from "./AC/index.js";
-import { getBeerItems, queryApi } from "../utils/api.js";
+import { getBeers } from "../utils/api.js";
 import { scrollToFirstItem } from "../utils/scrollToFirstItem.js";
 import CONSTANTS from "./constants.js";
 
@@ -36,7 +36,8 @@ const handleSubmit = async (e) => {
     try {
       {
         const query = target.searchInput.value.trim();
-        const beerItems = await getBeerItems(query);
+        const beerItems = await getBeers(query);
+        console.log(beerItems);
         if (beerItems.length !== 0) {
           breweryStore.dispatch(addNewItems(beerItems));
           breweryStore.dispatch(addNewSearchItem(query));
