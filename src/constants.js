@@ -1,0 +1,5 @@
+export default {
+  HEADER: "header",
+  ADD_NEW_ITEMS: "ADD_NEW_ITEMS",
+  ADD_NEW_SEARCH_ITEM: "CONSTANTS.ADD_NEW_SEARCH_ITEM",
+};

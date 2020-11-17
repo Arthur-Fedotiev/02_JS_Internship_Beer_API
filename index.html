@@ -13,22 +13,27 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!-- Custom styles for bootstrap blog (header) template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" />
-    </head>
+    <link rel="stylesheet" href="./public/style.css">
+</head>
 
 <body>
     <header>
         <nav class="navbar navbar-light bg-dark">
             <!-- <a class="navbar-brand">Choose the one that tastes you perfect!</a> -->
             <div class="col-lg-8 col-md-6 col-sm-4 text-center">
-                <h1 class="blog-header-logo text-warning" href="#">Brewery</h1>
+                <h1 class="text-warning" href="#">Brewery</h1>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-8">
                 <aside id="beerSearchFormContainer"></aside>
-                <div id="recentSearches" class="row text-right" ></div>
-        </nav>
+         </nav>
         </div>
     </header>
-    <main></main>
+    <div id="recentSearches" class="row text-center  bg-dark "></div>
+    <main>
+        <div id="beersListContainer" class="container bg-light py-5">
+
+        </div>
+    </main>
     <footer></footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -41,3 +46,4 @@
 </body>
 
 </html>
+

@@ -3,8 +3,12 @@ export default class SearchForm {
     this.container = container;
   }
 
+  getHeight() {
+    return this.container.offsetHeight;
+  }
+
   render(el) {
-    this.container.innerHTML = ` <form class="form-inline mb-0">
+    this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0">
         <div class="input-group">
           <input
             name="searchInput"
@@ -13,18 +17,14 @@ export default class SearchForm {
             type="search"
             placeholder="Search"
           />
-          <div class="input-group-append">
-            <span
-              class="input-group-text amber lighten-3 mr-3"
-              id="basic-text1"
-            >
-              <i class="fas fa-search text-grey" aria-hidden="true"></i>
-            </span>
-          </div>
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button">
-            Favourites
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <i  id="searchIcon" class="fas fa-search text-grey" aria-hidden="true"></i>
           </button>
+          </div>
         </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button">
+                    Favourites
+                  </button>
       </form>`;
   }
 }
