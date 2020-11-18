@@ -3,6 +3,7 @@ import {
   recentSearches,
   beersList,
   scrollTopArrow,
+  modalWindow,
 } from "./pageMarkupComponents.js";
 import ReduceStore from "../flux/ReduceStore.js";
 import Reducer from "./Reducer.js";
@@ -211,6 +212,7 @@ const render = ({
   beersList.render(beerItems, err, loading, favorites);
   recentSearches.render(searchItems);
   beerSearchForm.render(err, loading, searchQuery, favorites.length);
+  modalWindow.render(favorites);
 };
 
 // --------------- CALLING & REGISTRING of RENDER
@@ -219,3 +221,4 @@ breweryStore.register(render);
 
 //---------------- Just handy (must be deleted later)
 window.breweryStore = breweryStore;
+window.toggleModal = modalWindow.toggleModal;
