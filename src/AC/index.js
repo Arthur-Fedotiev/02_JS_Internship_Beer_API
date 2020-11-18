@@ -28,3 +28,13 @@ export const toggleLoading = (value) => ({
   type: CONSTANTS.TOGGLE_LOADING,
   payload: value,
 });
+
+export const addToFavorites = (id) => ({
+  type: CONSTANTS.ADD_TO_FAVORITES,
+  payload: id,
+});
+
+export const deleteFromFavorites = (id) => ({
+  type: CONSTANTS.DELETE_FROM_FAVORITES,
+  payload: id,
+});

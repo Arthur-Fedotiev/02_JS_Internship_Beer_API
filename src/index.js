@@ -13,6 +13,8 @@ import {
   handleDelete,
   setSearchQuery,
   toggleLoading,
+  addToFavorites,
+  deleteFromFavorites,
 } from "./AC/index.js";
 import { getBeers } from "../utils/api.js";
 import { scrollToFirstItem, scrollToBottom } from "../utils/scroll.js";
@@ -33,6 +35,7 @@ class BreweryStore extends ReduceStore {
       currentPage: 1,
       searchQuery: "",
       loading: false,
+      favorites: [],
     };
   }
   reduce = (state, action) => Reducer(state, action);
@@ -52,7 +55,10 @@ const handleSubmit = async (e) => {
       name: "searchQuery",
       value: target.searchInput.value,
     });
+
     breweryStore.dispatch(handleError(err));
+    if (err["searchQuery"]) breweryStore.dispatch(setSearchQuery(""));
+
     if (!err["searchQuery"]) {
       try {
         breweryStore.dispatch(toggleLoading(true));
@@ -70,6 +76,7 @@ const handleSubmit = async (e) => {
           breweryStore.dispatch(addNewItems(receivedBeerItems));
           breweryStore.dispatch(addNewSearchItem(query));
           breweryStore.dispatch(setSearchQuery(query));
+          //document.getElementById("searchInput").value = "";
           scrollToFirstItem();
         }
         if (!isEmpty(receivedBeerItems) && !isEmpty(beerItems)) {
@@ -84,9 +91,11 @@ const handleSubmit = async (e) => {
           breweryStore.dispatch(addNewItems(receivedBeerItems));
           breweryStore.dispatch(addNewSearchItem(query));
           breweryStore.dispatch(setSearchQuery(query));
+          //document.getElementById("searchInput").value = "";
           scrollToFirstItem();
         }
       } catch (error) {
+        breweryStore.dispatch(setSearchQuery(""));
         breweryStore.dispatch(
           handleError({ emptyResponse: "Oops... Something went wrong" })
         );
@@ -142,6 +151,7 @@ const handleClick = async ({ target }) => {
       breweryStore.dispatch(handleDelete([]));
     } finally {
       breweryStore.dispatch(toggleLoading(false));
+      document.getElementById("searchInput").value = query;
     }
   }
 
@@ -171,6 +181,17 @@ const handleClick = async ({ target }) => {
   }
 
   if (scrollTopArrow.isMyChild(target)) return scrollToFirstItem();
+
+  if (!!target.dataset.favorite) {
+    const addItemToFavorites = target.dataset.favorite === "add";
+    if (addItemToFavorites) {
+      breweryStore.dispatch(addToFavorites(target.id));
+    }
+    if (!addItemToFavorites) {
+      breweryStore.dispatch(deleteFromFavorites(target.id));
+    }
+    //document.getElementById("searchInput").value = query;
+  }
 };
 
 document.addEventListener("submit", handleSubmit);
@@ -179,10 +200,17 @@ window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 
 //----------------VIEWS
 
-const render = ({ beerItems, searchItems, err, searchQuery, loading }) => {
-  beersList.render(beerItems, err, loading);
+const render = ({
+  beerItems,
+  searchItems,
+  err,
+  searchQuery,
+  loading,
+  favorites,
+}) => {
+  beersList.render(beerItems, err, loading, favorites);
   recentSearches.render(searchItems);
-  beerSearchForm.render(err, loading, searchQuery);
+  beerSearchForm.render(err, loading, searchQuery, favorites.length);
 };
 
 // --------------- CALLING & REGISTRING of RENDER

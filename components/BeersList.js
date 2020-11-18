@@ -32,31 +32,41 @@ export default class BeersList {
 
   imgToHTML(img) {
     return `<div class="col-4">
-    <img class="beer-card-img card-img-right flex-auto d-none d-md-block"
+    <img class="beer-card-img card-img-right flex-auto d-none d-block"
      src=${img}>
 </div>`;
   }
 
-  cardBodyToHTML({ logo, name, id, description }) {
+  isFavorite(id, favorites) {
+    return isEmpty(favorites)
+      ? false
+      : favorites.some((beer) => beer.id === id);
+  }
+
+  cardBodyToHTML({ logo, name, id, description }, favorites) {
     return `<div class="card-body d-flex flex-column align-items-start">
     <strong class="d-inline-block mb-2 text-success">${logo}</strong>
-    <h3 class="mb-0">
+    <h3 class="m-0">
         <a class="text-dark" href="#">${name}</a>
     </h3>
     <p class="card-text mb-auto elipsis overflow">${this.shortenDescription(
       description
     )}</p>
-    <a id=${id} href="#">Continue reading</a>
+    <button id=${id} data-favorite=${
+      this.isFavorite(id, favorites) ? "delete" : "add"
+    } type="button" class="font-weight-bold btn btn-block btn-${
+      this.isFavorite(id, favorites) ? "danger" : "warning"
+    } mt-2">${this.isFavorite(id, favorites) ? "REMOVE" : "ADD"}</button>
 </div>`;
   }
 
-  beerItemsToHTML(beerItems) {
+  beerItemsToHTML(beerItems, favorites) {
     return beerItems.map(
       (beer) => `<div class="row mb-2 justify-content-center">
-  <div id="beerItem" class="col-sm-12 col-md-10 col-lg-6">
-      <div class="card flex-md-row mb-4 box-shadow h-md-250 align-items-center">
+  <div id="beerItem" class="col-sm-12 col-md-10 col-lg-8">
+      <div class="card flex-row mb-4 box-shadow h-md-250 align-items-center">
           <div class="col-8">
-              ${this.cardBodyToHTML(beer)}
+              ${this.cardBodyToHTML(beer, favorites)}
           </div>
          ${this.imgToHTML(beer.img)}
       </div>
@@ -65,16 +75,16 @@ export default class BeersList {
     );
   }
 
-  beerContainerToHTML(beerItems, err, loading) {
-    return `${this.beerItemsToHTML(beerItems)}
+  beerContainerToHTML(beerItems, err, loading, favorites) {
+    return `${this.beerItemsToHTML(beerItems, favorites)}
     ${this.loadBtnToHTML(beerItems, err, loading)}`;
   }
 
-  render(beerItems, err, loading) {
+  render(beerItems, err, loading, favorites) {
     const isEmptyResponse = !!err["emptyResponse"];
 
     this.container.innerHTML = isEmptyResponse
       ? this.errorMessageToHTML(err["emptyResponse"])
-      : this.beerContainerToHTML(beerItems, err, loading);
+      : this.beerContainerToHTML(beerItems, err, loading, favorites);
   }
 }

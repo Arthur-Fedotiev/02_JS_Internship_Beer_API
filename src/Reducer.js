@@ -55,6 +55,18 @@ export default (state, action) => {
         ...state,
         loading: payload,
       };
+    case CONSTANTS.ADD_TO_FAVORITES:
+      const index = state.beerItems.findIndex((beer) => beer.id === +payload);
+      const beerToAdd = state.beerItems[index];
+      return {
+        ...state,
+        favorites: [...state.favorites, beerToAdd],
+      };
+    case CONSTANTS.DELETE_FROM_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter((beer) => beer.id !== +payload),
+      };
     default:
       return state;
   }
