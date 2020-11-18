@@ -13,7 +13,7 @@ export default class RecentSearches {
       .map(
         (
           entry
-        ) => `<li class="list-group-item d-flex justify-content-between align-items-center">
+        ) => `<li data-search-query=${entry} class="list-group-item d-flex justify-content-between align-items-center">
       ${entry}
       <span class="badge badge-primary badge-pill">1</span>
     </li>`

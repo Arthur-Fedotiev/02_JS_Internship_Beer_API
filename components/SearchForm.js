@@ -11,7 +11,7 @@ export default class SearchForm {
       : "";
   }
 
-  render(err, loading) {
+  render(err, loading, searchQuery) {
     const isFieldEmpty = !!err["searchQuery"];
     this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0 d-flex justify-content-center">
         <div class="input-group">
@@ -20,6 +20,7 @@ export default class SearchForm {
             id="searchInput"
             class="form-control mr-0 ${isFieldEmpty ? "alert-warning" : ""}"
             type="search"
+            ${searchQuery ? `value=${searchQuery}` : ""}
             placeholder="${isFieldEmpty ? `${err["searchQuery"]}` : "Search"}"
           />
           <button class="btn btn-outline-success" type="submit" ${

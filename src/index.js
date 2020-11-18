@@ -93,16 +93,62 @@ const handleSubmit = async (e) => {
         breweryStore.dispatch(handleDelete([]));
       } finally {
         breweryStore.dispatch(toggleLoading(false));
+        document.getElementById("searchInput").value = "";
       }
     }
   }
 };
 
 const handleClick = async ({ target }) => {
+  if (!!target.dataset.searchQuery) {
+    const query = target.dataset.searchQuery;
+
+    try {
+      breweryStore.dispatch(toggleLoading(true));
+      breweryStore.dispatch(setSearchQuery(query));
+
+      const { beerItems } = breweryStore.getState();
+      const receivedBeerItems = await getBeers(query);
+
+      if (isEmpty(receivedBeerItems)) {
+        breweryStore.dispatch(
+          handleError({ emptyResponse: CONSTANT.EMPTY_RESPONSE })
+        );
+        breweryStore.dispatch(handleDelete([]));
+      }
+      if (!isEmpty(receivedBeerItems) && isEmpty(beerItems)) {
+        breweryStore.dispatch(handleError({ emptyResponse: "" }));
+        breweryStore.dispatch(addNewItems(receivedBeerItems));
+        //todo: +1 point to search query
+        scrollToFirstItem();
+      }
+      if (!isEmpty(receivedBeerItems) && !isEmpty(beerItems)) {
+        breweryStore.dispatch(handleDelete([]));
+        breweryStore.dispatch(
+          handleError({
+            searchQuery: "",
+            emptyResponse: "",
+            allBeersFetched: "",
+          })
+        );
+        breweryStore.dispatch(addNewItems(receivedBeerItems));
+        //todo: +1 point to search query
+        scrollToFirstItem();
+      }
+    } catch (error) {
+      breweryStore.dispatch(
+        handleError({ emptyResponse: "Oops... Something went wrong" })
+      );
+      breweryStore.dispatch(handleDelete([]));
+    } finally {
+      breweryStore.dispatch(toggleLoading(false));
+    }
+  }
+
   if (target.id === "loadMore") {
     try {
       breweryStore.dispatch(toggleLoading(true));
-      const { searchQuery, currentPage, beerItems } = breweryStore.getState();
+      const { searchQuery, currentPage } = breweryStore.getState();
       const receivedBeerItems = await getBeers(searchQuery, currentPage);
 
       if (!isEmpty(receivedBeerItems)) {
@@ -115,7 +161,10 @@ const handleClick = async ({ target }) => {
         );
       }
     } catch (error) {
-      console.log(error);
+      breweryStore.dispatch(
+        handleError({ emptyResponse: "Oops... Something went wrong" })
+      );
+      breweryStore.dispatch(handleDelete([]));
     } finally {
       breweryStore.dispatch(toggleLoading(false));
     }
@@ -133,7 +182,7 @@ window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 const render = ({ beerItems, searchItems, err, searchQuery, loading }) => {
   beersList.render(beerItems, err, loading);
   recentSearches.render(searchItems);
-  beerSearchForm.render(err, loading);
+  beerSearchForm.render(err, loading, searchQuery);
 };
 
 // --------------- CALLING & REGISTRING of RENDER
