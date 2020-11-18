@@ -11,9 +11,9 @@ export default class SearchForm {
       : "";
   }
 
-  render(err) {
+  render(err, loading) {
     const isFieldEmpty = !!err["searchQuery"];
-    this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0 d-flex justify-content-between">
+    this.container.innerHTML = ` <form name="searchForm" class="form-inline mb-0 d-flex justify-content-center">
         <div class="input-group">
           <input
             name="searchInput"
@@ -22,14 +22,17 @@ export default class SearchForm {
             type="search"
             placeholder="${isFieldEmpty ? `${err["searchQuery"]}` : "Search"}"
           />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <button class="btn btn-outline-success" type="submit" ${
+            loading ? "disabled" : ""
+          }>
           <i  id="searchIcon" class="fas fa-search text-grey" aria-hidden="true"></i>
           </button>
           </div>
       <button class="btn btn-outline-success my-2 my-sm-0" type="button">
                     Favourites
                   </button>
+                  ${this.errorMessageToHTML(isFieldEmpty)}
       </form>
-      ${this.errorMessageToHTML(isFieldEmpty)}`;
+      `;
   }
 }

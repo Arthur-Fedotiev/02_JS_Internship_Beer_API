@@ -18,3 +18,13 @@ export const handleDelete = () => ({
   type: CONSTANTS.HANDLE_DELETE,
   payload: null,
 });
+
+export const setSearchQuery = (query) => ({
+  type: CONSTANTS.SET_SEARCH_QUERY,
+  payload: query,
+});
+
+export const toggleLoading = (value) => ({
+  type: CONSTANTS.TOGGLE_LOADING,
+  payload: value,
+});
