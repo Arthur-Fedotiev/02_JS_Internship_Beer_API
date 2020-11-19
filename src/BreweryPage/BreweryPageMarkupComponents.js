@@ -1,9 +1,9 @@
-import SearchForm from "../components/SearchForm.js";
-import RecenetSearches from "../components/RecentSearches.js";
-import BeersList from "../components/BeersList.js";
-import ScrollTopArrow from "../components/ScrollTopArrow.js";
-import ModalFavorites from "../components/ModalFavorites.js";
-import ModalBeerItem from "../components/ModalBeerItem.js";
+import SearchForm from "../../components/SearchForm.js";
+import RecenetSearches from "../../components/RecentSearches.js";
+import BeersList from "../../components/BeersList.js";
+import ScrollTopArrow from "../../components/ScrollTopArrow.js";
+import ModalFavorites from "../../components/ModalFavorites.js";
+import ModalBeerItem from "../../components/ModalBeerItem.js";
 
 export const beerSearchForm = new SearchForm(
   document.getElementById("beerSearchFormContainer")

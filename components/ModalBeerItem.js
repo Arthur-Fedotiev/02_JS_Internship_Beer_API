@@ -6,11 +6,7 @@ export default class ModalBeerItem {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  shortenDescription(description) {
-    return `${description.substring(0, 250)}...`;
-  }
-
-  imgToHTML(img, id, favorites) {
+  imgToHTML({ img, id }, favorites) {
     return `<div class="col-sm-3 col-md-4 col-lg-3">
     <img class="beer-card-img card-img-right flex-auto d-none d-block"
      src=${img}>
@@ -34,14 +30,17 @@ export default class ModalBeerItem {
       : favorites.some((beer) => beer.id === id);
   }
 
-  cardBodyToHTML({ logo, name, id, description }) {
+  cardBodyToHTML({ logo, name, id, description, breweryTips }) {
     return `<div class="card-body d-flex flex-column align-items-start">
     <strong class="d-inline-block mb-2 text-success">${logo}</strong>
     <h3 class="m-0">
         <a id=${id} data-role="beerPicker" class="text-dark" href="#">${name}</a>
     </h3>
-    <p class="card-text mb-auto elipsis overflow">${description}</p>
-   </div>`;
+    <p class="card-text mb-auto">${description}</p>
+    <div class="card-footer text-muted">
+    ${breweryTips}
+  </div>
+    </div>`;
   }
 
   beerItemToHTML(beerItem, favorites) {
@@ -51,11 +50,12 @@ export default class ModalBeerItem {
           <div class="col-sm-9 col-md-7 col-lg-9">
               ${this.cardBodyToHTML(beerItem)}
           </div>
-         ${this.imgToHTML(beerItem.img, beerItem.id, favorites)}
+         ${this.imgToHTML(beerItem, favorites)}
       </div>
   </div>
 </div>`;
   }
+
   render(beerItem, favorites) {
     this.container.innerHTML =
       beerItem.id && this.beerItemToHTML(beerItem, favorites);

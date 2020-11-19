@@ -1,3 +1,5 @@
+import { isEmpty } from "../utils/validate.js";
+
 export default class RecentSearches {
   constructor(container) {
     this.container = container;
@@ -21,13 +23,25 @@ export default class RecentSearches {
       .join("");
   }
 
-  render(recentSearches = []) {
-    this.container.innerHTML = ` 
-    <h4 class="text-warning">Recent searches</h4>
-    <div id="1" class="col-12 p-4 d-flex justify-content-center">
+  headerToHTML() {
+    return `<h4 class="text-warning">Recent searches</h4>`;
+  }
+
+  render(recentSearches) {
+    console.log(recentSearches);
+    const noSearches = isEmpty(recentSearches);
+    console.log(noSearches);
+
+    this.container.innerHTML = `
+    ${this.headerToHTML()} 
+    ${
+      !noSearches
+        ? `<div class="col-12 p-4 d-flex justify-content-center">
     <div class="col-6">
     <ul class="list-group">${this.searchesToHTML(recentSearches)}</ul>
     </div>
-    </div>`;
+    </div>`
+        : ""
+    } `;
   }
 }

@@ -1,13 +1,10 @@
 import { isEmpty } from "../utils/validate.js";
+import shortenDescription from "../utils/shortenDescription.js";
 
 export default class ModalFavorites {
   constructor(container) {
     this.container = container;
     this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  shortenDescription(description) {
-    return `${description.substring(0, 250)}...`;
   }
 
   imgToHTML(img, id, favorites) {
@@ -40,7 +37,7 @@ export default class ModalFavorites {
     <h3 class="m-0">
         <a id=${id} data-role="beerPicker" class="text-dark" href="#">${name}</a>
     </h3>
-    <p class="card-text mb-auto elipsis overflow">${this.shortenDescription(
+    <p class="card-text mb-auto elipsis overflow">${shortenDescription(
       description
     )}</p>
    </div>`;
@@ -52,7 +49,7 @@ export default class ModalFavorites {
   <div id="beerItem" class="col-sm-12 col-md-10 col-lg-8">
       <div class="card flex-row mb-4 box-shadow h-md-250 align-items-center">
           <div class="col-sm-9 col-md-7 col-lg-9">
-              ${this.cardBodyToHTML(beer, favorites)}
+              ${this.cardBodyToHTML(beer)}
           </div>
          ${this.imgToHTML(beer.img, beer.id, favorites)}
       </div>
@@ -72,11 +69,14 @@ export default class ModalFavorites {
       </div>
     </div>`;
   }
+
   render(favorites) {
     const favoritesListIsEmpty = isEmpty(favorites);
+
     this.container.innerHTML = favoritesListIsEmpty
       ? this.emptyListOfFavorites()
       : this.beerContainerToHTML(favorites);
+
     favoritesListIsEmpty && this.toggleModal(false, 2000);
   }
 }

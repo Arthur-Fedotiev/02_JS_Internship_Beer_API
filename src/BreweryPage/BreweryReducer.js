@@ -1,4 +1,4 @@
-import CONSTANTS from "./constants.js";
+import CONSTANTS from "../constants.js";
 
 //----------HELPERS
 
@@ -16,7 +16,7 @@ export const createBeerItem = ({
   description,
   img: image_url,
   favourite: false,
-  brewers_tips,
+  breweryTips: brewers_tips,
 });
 
 export default (state, action) => {

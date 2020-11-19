@@ -1,6 +1,12 @@
+import CONSTANT from "../src/constants.js";
+
 export default (data) => {
   const err = {};
-  if (!data.value) err[data.name] = "Must be filled up!";
+
+  if (!data.value) {
+    err[data.name] = CONSTANT.EMPTY_QUERY;
+  }
+
   return err;
 };
 

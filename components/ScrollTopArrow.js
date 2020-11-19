@@ -1,3 +1,5 @@
+import CONSTANT from "../src/constants.js";
+
 export default class ScrollTopArrow {
   constructor(container) {
     this.container = container;
@@ -14,7 +16,7 @@ export default class ScrollTopArrow {
       .getElementById("beersListContainer")
       .getBoundingClientRect();
 
-    if (top <= -89) {
+    if (top <= CONSTANT.BEERS_LIST_TOP_OFFSET) {
       arrow.style.display = "block";
     } else {
       arrow.style.display = "none";
