@@ -5,9 +5,9 @@ export default class SearchForm {
 
   errorMessageToHTML(isFieldEmpty) {
     return isFieldEmpty
-      ? `<div class="alert alert-danger mt-2" role="alert">
-    Ya wanna get some <a href="#" class="alert-link">proper drink</a>, ain't ya?
-  </div>`
+      ? `<div class="alert text-danger mt-2 d-flex justify-content-center" role="alert">
+      Ya wanna get some proper drink, ain't ya?
+    </div>`
       : "";
   }
 
@@ -29,13 +29,13 @@ export default class SearchForm {
           <i  id="searchIcon" class="fas fa-search text-grey" aria-hidden="true"></i>
           </button>
           </div>
-      <button class="btn btn-success my-2 my-sm-0" type="button" ${
+      <button id="favoriteBtn" class="btn btn-success my-2 my-sm-0" type="button" ${
         !favouritesCount ? "disabled" : ""
       }>
-                    Favourites: ${favouritesCount}
-                  </button>
-                  ${this.errorMessageToHTML(isFieldEmpty)}
+        Favourites: ${favouritesCount}
+       </button>
       </form>
+      ${this.errorMessageToHTML(isFieldEmpty)}
       `;
   }
 }

@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
       value: target.searchInput.value,
     });
 
-    breweryStore.dispatch(handleError(err));
+    breweryStore.dispatch(handleError({ ...err, emptyResponse: "" }));
     if (err["searchQuery"]) breweryStore.dispatch(setSearchQuery(""));
 
     if (!err["searchQuery"]) {
@@ -98,7 +98,10 @@ const handleSubmit = async (e) => {
       } catch (error) {
         breweryStore.dispatch(setSearchQuery(""));
         breweryStore.dispatch(
-          handleError({ emptyResponse: "Oops... Something went wrong" })
+          handleError({
+            emptyResponse: "Oops... Something went wrong",
+            searchQuery: "",
+          })
         );
         breweryStore.dispatch(handleDelete([]));
       } finally {
@@ -193,10 +196,20 @@ const handleClick = async ({ target }) => {
     }
     //document.getElementById("searchInput").value = query;
   }
+
+  if (target.id === "favoriteBtn") {
+    modalWindow.toggleModal(true);
+  }
+};
+
+const handleKeydown = (e) => {
+  if (e.keyCode !== 27) return;
+  modalWindow.toggleModal(false);
 };
 
 document.addEventListener("submit", handleSubmit);
 document.addEventListener("click", handleClick);
+document.addEventListener("keydown", handleKeydown);
 window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 
 //----------------VIEWS
