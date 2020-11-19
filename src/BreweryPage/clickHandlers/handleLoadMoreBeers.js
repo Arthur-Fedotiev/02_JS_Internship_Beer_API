@@ -19,6 +19,7 @@ export default async (store, actionCreators) => {
       store.dispatch(addNewItems(receivedBeerItems));
       scrollToBottom();
     }
+
     if (isEmpty(receivedBeerItems)) {
       store.dispatch(
         handleError({ allBeersFetched: "That's all we've got for ya ;)" })

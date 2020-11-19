@@ -1,4 +1,4 @@
-import { isEmpty } from "../utils/validate.js";
+import { isEmpty, isEmptyObj } from "../utils/validate.js";
 
 export default class SearchForm {
   constructor(container) {
@@ -20,10 +20,16 @@ export default class SearchForm {
     <input
       name="searchInput"
       id="searchInput"
-      class="form-control mr-0 ${isFieldEmpty ? "alert-warning" : ""}"
+      class="form-control mr-0 ${
+        isFieldEmpty && !loading ? "alert-warning" : ""
+      }"
       type="search"
-      ${searchQuery && !loading ? `value=${searchQuery}` : ""}
-      placeholder="${isFieldEmpty ? `${err["searchQuery"]}` : "Search"}"
+      ${
+        searchQuery && !loading && isEmptyObj(err) ? `value=${searchQuery}` : ""
+      }
+      placeholder="${
+        isFieldEmpty && !loading ? `${err["searchQuery"]}` : "Search"
+      }"
     />
     <button class="btn btn-outline-success" type="submit" ${
       loading ? "disabled" : ""

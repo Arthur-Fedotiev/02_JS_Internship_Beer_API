@@ -48,6 +48,7 @@ export default class ModalFavorites {
       (beer) => `<div class="row mb-2 justify-content-center">
   <div id="beerItem" class="col-sm-12 col-md-10 col-lg-8">
       <div class="card flex-row mb-4 box-shadow h-md-250 align-items-center">
+      <span id="closeFavoriteModal" data-role="toggleModal" class="close text-danger">&times;</span>
           <div class="col-sm-9 col-md-7 col-lg-9">
               ${this.cardBodyToHTML(beer)}
           </div>

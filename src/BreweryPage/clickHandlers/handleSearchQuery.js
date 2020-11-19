@@ -24,11 +24,13 @@ export default async (target, store, actionCreators) => {
       store.dispatch(handleError({ emptyResponse: CONSTANT.EMPTY_RESPONSE }));
       store.dispatch(handleDelete([]));
     }
+
     if (!isEmpty(receivedBeerItems) && isEmpty(beerItems)) {
       store.dispatch(handleError({ emptyResponse: "" }));
       store.dispatch(addNewItems(receivedBeerItems));
       scrollToFirstItem();
     }
+
     if (!isEmpty(receivedBeerItems) && !isEmpty(beerItems)) {
       store.dispatch(handleDelete([]));
       store.dispatch(

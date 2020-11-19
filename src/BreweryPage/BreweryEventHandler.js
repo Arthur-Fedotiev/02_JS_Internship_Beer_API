@@ -4,6 +4,7 @@ import clickHandlers from "./clickHandlers/index.js";
 import handleSearchSubmit from "./submitHandlers/handleSearchSubmit/handleSearchSubmit.js";
 import * as actionCreators from "../AC/index.js";
 import { scrollToFirstItem } from "../../utils/scroll.js";
+import CONSTANT from "../../src/constants.js";
 import {
   scrollTopArrow,
   modalFavorites,
@@ -41,9 +42,16 @@ export class BreweryEventHandler extends EventHandler {
     if (target.id === "favoriteBtn") {
       modalFavorites.toggleModal(true);
     }
+
     if (target.dataset.role === "beerPicker") {
       this.store.dispatch(actionCreators.pickBeerItem(target.id));
       modalBeerItem.toggleModal(true);
+    }
+
+    if (target.dataset.role === "toggleModal") {
+      target.id === "closeBeerModal"
+        ? modalBeerItem.toggleModal(false)
+        : modalFavorites.toggleModal(false);
     }
   };
 
@@ -56,12 +64,11 @@ export class BreweryEventHandler extends EventHandler {
   };
 
   handleKeydown = (e) => {
-    if (e.keyCode !== 27) return;
+    if (e.keyCode !== CONSTANT.ESCAPE_CODE) return;
+
     modalFavorites.toggleModal(false);
     modalBeerItem.toggleModal(false);
   };
-
-  handleScroll() {}
 }
 
 export default new BreweryEventHandler(BreweryStore);

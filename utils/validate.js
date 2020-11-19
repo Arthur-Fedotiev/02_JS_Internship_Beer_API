@@ -13,3 +13,7 @@ export default (data) => {
 export const isEmpty = (value) => {
   return value.length === 0;
 };
+
+export const isEmptyObj = (obj) => {
+  return Object.keys(obj).length === 0;
+};

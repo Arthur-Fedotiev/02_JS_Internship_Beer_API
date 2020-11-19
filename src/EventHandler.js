@@ -14,8 +14,4 @@ export default class EventHandler {
   handleKeydown() {
     throw new Error("Must be overridden in");
   }
-
-  handleScroll() {
-    throw new Error("Must be overridden in");
-  }
 }

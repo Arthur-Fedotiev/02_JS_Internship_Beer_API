@@ -13,4 +13,5 @@ export default {
   BEERS_LIST_TOP_OFFSET: -89,
   EMPTY_RESPONSE: "There were no properties found for the given location",
   DESCRIPTION_TRUNCATION_NUMBER: 250,
+  ESCAPE_CODE: 29,
 };

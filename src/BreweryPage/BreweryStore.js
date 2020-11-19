@@ -1,5 +1,5 @@
 import ReduceStore from "../../flux/ReduceStore.js";
-import BreweryReducer from "./BreweryReducer.js";
+import breweryReducer from "./breweryReducer.js";
 
 class BreweryStore extends ReduceStore {
   setInitialState() {
@@ -14,7 +14,9 @@ class BreweryStore extends ReduceStore {
       pickedBeerItem: {},
     };
   }
-  reduce = (state, action) => BreweryReducer(state, action);
+  reduce(state, action) {
+    return breweryReducer(state, action);
+  }
 }
 
 export default new BreweryStore();

@@ -28,9 +28,7 @@ export default class RecentSearches {
   }
 
   render(recentSearches) {
-    console.log(recentSearches);
     const noSearches = isEmpty(recentSearches);
-    console.log(noSearches);
 
     this.container.innerHTML = `
     ${this.headerToHTML()} 

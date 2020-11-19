@@ -8,7 +8,7 @@ export default class ModalBeerItem {
 
   imgToHTML({ img, id }, favorites) {
     return `<div class="col-sm-3 col-md-4 col-lg-3">
-    <img class="beer-card-img card-img-right flex-auto d-none d-block"
+     <img class="beer-card-img card-img-right flex-auto d-none d-block"
      src=${img}>
      <button id=${id} data-favorite=${
       this.isFavorite(id, favorites) ? "delete" : "add"
@@ -47,7 +47,8 @@ export default class ModalBeerItem {
     return `<div class="row mb-2 justify-content-center">
   <div id="beerItem" class="col-sm-12 col-md-10 col-lg-8">
       <div class="card flex-row mb-4 box-shadow h-md-250 align-items-center">
-          <div class="col-sm-9 col-md-7 col-lg-9">
+      <span id="closeBeerModal" data-role="toggleModal" class="close text-danger">&times;</span>
+              <div class="col-sm-9 col-md-7 col-lg-9">
               ${this.cardBodyToHTML(beerItem)}
           </div>
          ${this.imgToHTML(beerItem, favorites)}

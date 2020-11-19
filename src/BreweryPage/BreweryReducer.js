@@ -1,7 +1,5 @@
 import CONSTANTS from "../constants.js";
 
-//----------HELPERS
-
 export const createBeerItem = ({
   id,
   name,
@@ -60,6 +58,7 @@ export default (state, action) => {
     case CONSTANTS.ADD_TO_FAVORITES:
       const index = state.beerItems.findIndex((beer) => beer.id === +payload);
       const beerToAdd = state.beerItems[index];
+
       return {
         ...state,
         favorites: [...state.favorites, beerToAdd],
@@ -70,7 +69,6 @@ export default (state, action) => {
         favorites: state.favorites.filter((beer) => beer.id !== +payload),
       };
     case CONSTANTS.PICK_BEER_ITEM:
-      console.log(payload);
       return {
         ...state,
         pickedBeerItem: state.beerItems.find((beer) => beer.id === +payload),

@@ -8,6 +8,7 @@ export default (store, actionCreators, query, receivedBeerItems) => {
     addNewSearchItem,
     setSearchQuery,
   } = actionCreators;
+
   store.dispatch(handleDelete([]));
   store.dispatch(
     handleError({
