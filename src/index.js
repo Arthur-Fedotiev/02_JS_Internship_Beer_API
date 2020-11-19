@@ -92,7 +92,6 @@ const handleSubmit = async (e) => {
           breweryStore.dispatch(addNewItems(receivedBeerItems));
           breweryStore.dispatch(addNewSearchItem(query));
           breweryStore.dispatch(setSearchQuery(query));
-          //document.getElementById("searchInput").value = "";
           scrollToFirstItem();
         }
       } catch (error) {
@@ -194,7 +193,7 @@ const handleClick = async ({ target }) => {
     if (!addItemToFavorites) {
       breweryStore.dispatch(deleteFromFavorites(target.id));
     }
-    //document.getElementById("searchInput").value = query;
+    document.getElementById("searchInput").value = "";
   }
 
   if (target.id === "favoriteBtn") {

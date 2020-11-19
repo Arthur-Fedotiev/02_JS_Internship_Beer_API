@@ -90,17 +90,12 @@ export default class BeersList {
 
   render(beerItems, err, loading, favorites) {
     const isEmptyResponse = !!err["emptyResponse"];
+    const showWelcomePage = isEmpty(beerItems) && !isEmptyResponse;
 
-    this.container.innerHTML =
-      isEmpty(beerItems) && !isEmptyResponse
-        ? `<div class="jumbotron">
-    <h1 class="display-4 text-warning text-center bold">Greeting Traveler!</h1>
-    <p class="lead text-center mt-2">Don't be shy and take a look at what we've got!</p>
-    <hr class="my-4">
-    
-  </div>`
-        : isEmptyResponse
-        ? this.errorMessageToHTML(err["emptyResponse"])
-        : this.beerContainerToHTML(beerItems, err, loading, favorites);
+    this.container.innerHTML = showWelcomePage
+      ? this.greeterToHTML()
+      : isEmptyResponse
+      ? this.errorMessageToHTML(err["emptyResponse"])
+      : this.beerContainerToHTML(beerItems, err, loading, favorites);
   }
 }
