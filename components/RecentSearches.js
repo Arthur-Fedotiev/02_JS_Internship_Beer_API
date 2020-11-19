@@ -15,7 +15,7 @@ export default class RecentSearches {
           entry
         ) => `<li data-search-query=${entry} class="list-group-item d-flex justify-content-between align-items-center">
       ${entry}
-      <span class="badge badge-primary badge-pill">1</span>
+      <span class="badge badge-warning badge-pill"><i class="fa fa-check" aria-hidden="true"></i></span>
     </li>`
       )
       .join("");

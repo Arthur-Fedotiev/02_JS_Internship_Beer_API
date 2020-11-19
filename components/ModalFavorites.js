@@ -1,6 +1,6 @@
 import { isEmpty } from "../utils/validate.js";
 
-export default class Modal {
+export default class ModalFavorites {
   constructor(container) {
     this.container = container;
     this.toggleModal = this.toggleModal.bind(this);
@@ -34,11 +34,11 @@ export default class Modal {
       : favorites.some((beer) => beer.id === id);
   }
 
-  cardBodyToHTML({ logo, name, id, description }, favorites) {
+  cardBodyToHTML({ logo, name, id, description }) {
     return `<div class="card-body d-flex flex-column align-items-start">
     <strong class="d-inline-block mb-2 text-success">${logo}</strong>
     <h3 class="m-0">
-        <a class="text-dark" href="#">${name}</a>
+        <a id=${id} data-role="beerPicker" class="text-dark" href="#">${name}</a>
     </h3>
     <p class="card-text mb-auto elipsis overflow">${this.shortenDescription(
       description

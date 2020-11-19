@@ -1,19 +1,22 @@
 import { isEmpty } from "../utils/validate.js";
+import CONSTANT from "../src/constants.js";
 export default class BeersList {
   constructor(container) {
     this.container = container;
   }
 
-  loadBtnToHTML(beerItems, err, loading) {
+  loadBtnToHTML({ beerItems, err, loading }) {
     const thereAreBeers = !isEmpty(beerItems);
     const allBeersFetched = !!err["allBeersFetched"];
+
     if (thereAreBeers && !allBeersFetched) {
       return `<button id="loadMore" type="button" class="btn btn-success btn-lg btn-block" ${
         loading ? "disabled" : ""
       }>Show me more!</button>`;
     }
-    if (thereAreBeers && allBeersFetched)
+    if (thereAreBeers && allBeersFetched) {
       return this.errorMessageToHTML(err["allBeersFetched"]);
+    }
     return "";
   }
 
@@ -27,7 +30,10 @@ export default class BeersList {
   }
 
   shortenDescription(description) {
-    return `${description.substring(0, 250)}...`;
+    return `${description.substring(
+      0,
+      CONSTANT.DESCRIPTION_TRUNCATION_NUMBER
+    )}...`;
   }
 
   imgToHTML(img) {
@@ -47,7 +53,7 @@ export default class BeersList {
     return `<div class="card-body d-flex flex-column align-items-start">
     <strong class="d-inline-block mb-2 text-success">${logo}</strong>
     <h3 class="m-0">
-        <a class="text-dark" href="#">${name}</a>
+        <a id=${id} data-role="beerPicker" class="text-dark" href="#">${name}</a>
     </h3>
     <p class="card-text mb-auto elipsis overflow">${this.shortenDescription(
       description
@@ -75,9 +81,9 @@ export default class BeersList {
     );
   }
 
-  beerContainerToHTML(beerItems, err, loading, favorites) {
-    return `${this.beerItemsToHTML(beerItems, favorites)}
-    ${this.loadBtnToHTML(beerItems, err, loading)}`;
+  beerContainerToHTML(state) {
+    return `${this.beerItemsToHTML(state.beerItems, state.favorites)}
+    ${this.loadBtnToHTML(state)}`;
   }
 
   greeterToHTML() {
@@ -88,14 +94,15 @@ export default class BeersList {
       </div>`;
   }
 
-  render(beerItems, err, loading, favorites) {
-    const isEmptyResponse = !!err["emptyResponse"];
-    const showWelcomePage = isEmpty(beerItems) && !isEmptyResponse;
+  render(state) {
+    console.log(state);
+    const isEmptyResponse = !!state.err["emptyResponse"];
+    const showWelcomePage = isEmpty(state.beerItems) && !isEmptyResponse;
 
     this.container.innerHTML = showWelcomePage
       ? this.greeterToHTML()
       : isEmptyResponse
-      ? this.errorMessageToHTML(err["emptyResponse"])
-      : this.beerContainerToHTML(beerItems, err, loading, favorites);
+      ? this.errorMessageToHTML(state.err["emptyResponse"])
+      : this.beerContainerToHTML(state);
   }
 }

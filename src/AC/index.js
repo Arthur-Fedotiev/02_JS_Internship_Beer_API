@@ -38,3 +38,8 @@ export const deleteFromFavorites = (id) => ({
   type: CONSTANTS.DELETE_FROM_FAVORITES,
   payload: id,
 });
+
+export const pickBeerItem = (id) => ({
+  type: CONSTANTS.PICK_BEER_ITEM,
+  payload: id,
+});

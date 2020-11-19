@@ -3,7 +3,8 @@ import {
   recentSearches,
   beersList,
   scrollTopArrow,
-  modalWindow,
+  modalFavorites,
+  modalBeerItem,
 } from "./pageMarkupComponents.js";
 import ReduceStore from "../flux/ReduceStore.js";
 import Reducer from "./Reducer.js";
@@ -16,6 +17,7 @@ import {
   toggleLoading,
   addToFavorites,
   deleteFromFavorites,
+  pickBeerItem,
 } from "./AC/index.js";
 import { getBeers } from "../utils/api.js";
 import { scrollToFirstItem, scrollToBottom } from "../utils/scroll.js";
@@ -37,6 +39,7 @@ class BreweryStore extends ReduceStore {
       searchQuery: "",
       loading: false,
       favorites: [],
+      pickedBeerItem: {},
     };
   }
   reduce = (state, action) => Reducer(state, action);
@@ -197,13 +200,18 @@ const handleClick = async ({ target }) => {
   }
 
   if (target.id === "favoriteBtn") {
-    modalWindow.toggleModal(true);
+    modalFavorites.toggleModal(true);
+  }
+  if (target.dataset.role === "beerPicker") {
+    breweryStore.dispatch(pickBeerItem(target.id));
+    modalBeerItem.toggleModal(true);
   }
 };
 
 const handleKeydown = (e) => {
   if (e.keyCode !== 27) return;
-  modalWindow.toggleModal(false);
+  modalFavorites.toggleModal(false);
+  modalBeerItem.toggleModal(false);
 };
 
 document.addEventListener("submit", handleSubmit);
@@ -213,18 +221,22 @@ window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 
 //----------------VIEWS
 
-const render = ({
-  beerItems,
-  searchItems,
-  err,
-  searchQuery,
-  loading,
-  favorites,
-}) => {
-  beersList.render(beerItems, err, loading, favorites);
-  recentSearches.render(searchItems);
-  beerSearchForm.render(err, loading, searchQuery, favorites.length);
-  modalWindow.render(favorites);
+const render = (state) => {
+  console.log(state);
+  const {
+    beerItems,
+    searchItems,
+    err,
+    searchQuery,
+    loading,
+    favorites,
+    pickedBeerItem,
+  } = state;
+  beersList.render(state);
+  recentSearches.render(state.searchItems);
+  beerSearchForm.render(state);
+  modalFavorites.render(favorites);
+  modalBeerItem.render(pickedBeerItem, favorites);
 };
 
 // --------------- CALLING & REGISTRING of RENDER
@@ -233,4 +245,4 @@ breweryStore.register(render);
 
 //---------------- Just handy (must be deleted later)
 window.breweryStore = breweryStore;
-window.toggleModal = modalWindow.toggleModal;
+window.toggleModal = modalFavorites.toggleModal;

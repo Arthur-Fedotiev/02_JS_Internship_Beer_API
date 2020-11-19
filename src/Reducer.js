@@ -8,6 +8,7 @@ export const createBeerItem = ({
   tagline,
   description,
   image_url,
+  brewers_tips,
 }) => ({
   id,
   name,
@@ -15,6 +16,7 @@ export const createBeerItem = ({
   description,
   img: image_url,
   favourite: false,
+  brewers_tips,
 });
 
 export default (state, action) => {
@@ -66,6 +68,12 @@ export default (state, action) => {
       return {
         ...state,
         favorites: state.favorites.filter((beer) => beer.id !== +payload),
+      };
+    case CONSTANTS.PICK_BEER_ITEM:
+      console.log(payload);
+      return {
+        ...state,
+        pickedBeerItem: state.beerItems.find((beer) => beer.id === +payload),
       };
     default:
       return state;
