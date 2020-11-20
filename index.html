@@ -11,25 +11,38 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <!-- Custom styles for bootstrap blog (header) template -->
+           <!-- Custom styles for bootstrap blog (header) template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" />
-    </head>
+    <link rel="stylesheet" href="./public/style.css">
+</head>
 
 <body>
     <header>
         <nav class="navbar navbar-light bg-dark">
             <!-- <a class="navbar-brand">Choose the one that tastes you perfect!</a> -->
+<<<<<<< HEAD
             <div class="col-lg-8 col-md-6 col-sm-4 text-center">
                 <h1 class="blog-header-logo text-warning" href="#">Brewery</h1>
+=======
+            <div class="col-lg-6 col-md-4 col-sm-12 text-center">
+                <h1 class="text-warning" href="#">Arthur's Brewery</h1>
+>>>>>>> feature/US008-add-possibility-to-view-single-item
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="col-lg-6 col-md-8 col-sm-12 justify-content-center">
                 <aside id="beerSearchFormContainer"></aside>
-                <div id="recentSearches" class="row text-right" ></div>
-        </nav>
+         </nav>
         </div>
     </header>
-    <main></main>
-    <footer></footer>
+    <div id="recentSearches" class="row text-center mx-0 bg-dark "></div>
+    <main>
+        <div id="beersListContainer" class="container py-5"></div>
+        <aside id="modalFavorites" class="modal bg-dark" role="dialog"></aside>
+        <aside id="modalBeerItem" class="modal bg-dark" role="dialog">
+        </aside>
+    </main>
+    <footer>
+        <aside id="scrollTopContainer"></aside>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -41,3 +54,4 @@
 </body>
 
 </html>
+
