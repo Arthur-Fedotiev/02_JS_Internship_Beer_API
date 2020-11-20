@@ -26,6 +26,7 @@ export default async (data) => {
         store.dispatch(actionCreators.toggleLoading(true));
         handleServerResponse(handleResponseData);
       } catch (error) {
+        console.log(error);
         handleServerError(store, actionCreators);
       } finally {
         handleFinally(store, actionCreators);

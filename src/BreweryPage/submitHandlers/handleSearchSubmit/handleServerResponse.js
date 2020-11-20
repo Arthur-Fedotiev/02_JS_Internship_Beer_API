@@ -1,18 +1,11 @@
 import handleBeerItemsSubstitution from "./searchSubmitCases/handleBeerItemsSubstitution.js";
 import handleEmptyResponse from "./searchSubmitCases/handleEmptyResponse.js";
-import { isEmpty } from "../../../../utils/validate.js";
 import { scrollToFirstItem } from "../../../../utils/scroll.js";
+import {
+  actionOnServerResponse,
+  someBeersWereRendered,
+} from "../../../../utils/api.js";
 import CONSTANT from "../../../constants.js";
-
-const actionOnServerResponse = (receivedBeerItems) => {
-  return isEmpty(receivedBeerItems)
-    ? CONSTANT.SERVER_RESPONSE_IS_EMPTY
-    : CONSTANT.SERVER_RESPONDED_WITH_BEERS;
-};
-
-const someBeersWereRendered = (beerItems) => {
-  return !isEmpty(beerItems);
-};
 
 const handleServerPayloadResponse = (data) => {
   const { store, beerItems, actionCreators, receivedBeerItems, query } = data;
