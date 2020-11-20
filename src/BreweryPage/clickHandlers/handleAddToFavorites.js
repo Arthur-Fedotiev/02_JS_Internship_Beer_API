@@ -9,5 +9,6 @@ export default ({ target, store, actionCreators }) => {
   if (!addItemToFavorites) {
     store.dispatch(deleteFromFavorites(target.id));
   }
+
   document.getElementById("searchInput").value = "";
 };

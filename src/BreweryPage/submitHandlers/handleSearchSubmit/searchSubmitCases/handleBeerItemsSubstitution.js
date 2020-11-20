@@ -1,13 +1,5 @@
-import { scrollToFirstItem } from "../../../../../utils/scroll.js";
-
-export default ({ store, actionCreators, query, receivedBeerItems }) => {
-  const {
-    handleDelete,
-    handleError,
-    addNewItems,
-    addNewSearchItem,
-    setSearchQuery,
-  } = actionCreators;
+export default ({ store, actionCreators }) => {
+  const { handleDelete, handleError } = actionCreators;
 
   store.dispatch(handleDelete([]));
   store.dispatch(
@@ -17,8 +9,4 @@ export default ({ store, actionCreators, query, receivedBeerItems }) => {
       allBeersFetched: "",
     })
   );
-  store.dispatch(addNewItems(receivedBeerItems));
-  store.dispatch(addNewSearchItem(query));
-  store.dispatch(setSearchQuery(query));
-  scrollToFirstItem();
 };

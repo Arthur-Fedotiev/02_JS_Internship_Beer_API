@@ -1,6 +1,6 @@
 import validate from "../../../../../utils/validate.js";
 
-export default (target, store, actionCreators) => {
+export default ({ target, store, actionCreators }) => {
   const { handleError, setSearchQuery } = actionCreators;
   const err = validate({
     name: "searchQuery",
@@ -12,5 +12,6 @@ export default (target, store, actionCreators) => {
   if (err["searchQuery"]) {
     store.dispatch(setSearchQuery(""));
   }
+
   return err;
 };

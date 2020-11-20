@@ -14,6 +14,7 @@ class BreweryStore extends ReduceStore {
       pickedBeerItem: {},
     };
   }
+
   reduce(state, action) {
     return breweryReducer(state, action);
   }

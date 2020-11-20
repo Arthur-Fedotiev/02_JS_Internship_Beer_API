@@ -23,12 +23,14 @@ export class BreweryEventHandler extends EventHandler {
   }
 
   handleClick = async ({ target }) => {
+    const dataForClickHandlers = { target, store: this.store, actionCreators };
+
     if (!!target.dataset.searchQuery) {
-      handleSearchQuery({ target, store: this.store, actionCreators });
+      handleSearchQuery(dataForClickHandlers);
     }
 
-    if (target.id === "loadMore") {
-      handleLoadMoreBeers(this.store, actionCreators);
+    if (target.id === CONSTANT.LOAD_MORE) {
+      handleLoadMoreBeers(dataForClickHandlers);
     }
 
     if (scrollTopArrow.isMyChild(target)) {
@@ -36,20 +38,20 @@ export class BreweryEventHandler extends EventHandler {
     }
 
     if (!!target.dataset.favorite) {
-      handleAddToFavorites({ target, store: this.store, actionCreators });
+      handleAddToFavorites(dataForClickHandlers);
     }
 
-    if (target.id === "favoriteBtn") {
+    if (target.id === CONSTANT.FAVORITE_BTN) {
       modalFavorites.toggleModal(true);
     }
 
-    if (target.dataset.role === "beerPicker") {
+    if (target.dataset.role === CONSTANT.BEER_PICKER) {
       this.store.dispatch(actionCreators.pickBeerItem(target.id));
       modalBeerItem.toggleModal(true);
     }
 
-    if (target.dataset.role === "toggleModal") {
-      target.id === "closeBeerModal"
+    if (target.dataset.role === CONSTANT.TOGGLE_MODAL) {
+      target.id === CONSTANT.CLOSE_BEER_MODAL
         ? modalBeerItem.toggleModal(false)
         : modalFavorites.toggleModal(false);
     }
@@ -58,7 +60,7 @@ export class BreweryEventHandler extends EventHandler {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (e.target.name === "searchForm") {
+    if (e.target.name === CONSTANT.SEARCH_FORM) {
       handleSearchSubmit({
         target: e.target,
         store: this.store,

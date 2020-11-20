@@ -12,6 +12,7 @@ export default async (store, actionCreators) => {
 
   try {
     store.dispatch(toggleLoading(true));
+
     const { searchQuery, currentPage } = store.getState();
     const receivedBeerItems = await getBeers(searchQuery, currentPage);
 

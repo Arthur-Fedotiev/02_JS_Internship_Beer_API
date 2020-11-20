@@ -4,14 +4,14 @@ export default class EventHandler {
   }
 
   handleSubmit() {
-    throw new Error("Must be overridden in");
+    throw new Error("Must be overridden in sublasses");
   }
 
   handleClick() {
-    throw new Error("Must be overridden in");
+    throw new Error("Must be overridden in sublasses");
   }
 
   handleKeydown() {
-    throw new Error("Must be overridden in");
+    throw new Error("Must be overridden in sublasses");
   }
 }
