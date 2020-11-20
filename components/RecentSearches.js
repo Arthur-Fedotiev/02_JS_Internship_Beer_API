@@ -23,13 +23,6 @@ export default class RecentSearches {
       .join("");
   }
 
-<<<<<<< HEAD
-  render(recentSearches = []) {
-    this.container.innerHTML = ` <div id="1" class="col-6 bg-dark p-4">
-    <h4 class="text-warning">Recent searches</h4>
-    ${this.searchesToHTML(recentSearches)}
-</div>`;
-=======
   headerToHTML() {
     return `<h4 class="text-warning">Recent searches</h4>`;
   }
@@ -48,6 +41,5 @@ export default class RecentSearches {
     </div>`
         : ""
     } `;
->>>>>>> feature/US008-add-possibility-to-view-single-item
   }
 }
