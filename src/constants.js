@@ -22,4 +22,5 @@ export default {
   BEER_PICKER: "beerPicker",
   TOGGLE_MODAL: "toggleModal",
   CLOSE_BEER_MODAL: "closeBeerModal",
+  ADD_TO_FAVORITES: "add",
 };

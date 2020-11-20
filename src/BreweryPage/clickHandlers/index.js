@@ -1,6 +1,6 @@
 import handleAddToFavorites from "./handleAddToFavorites.js";
-import handleLoadMoreBeers from "./handleLoadMoreBeers.js";
-import handleSearchQuery from "./handleSearchQuery.js";
+import handleLoadMoreBeers from "./LoadMoreBeers.js";
+import handleSearchQuery from "./SearchQuery.js";
 
 export default {
   handleAddToFavorites,

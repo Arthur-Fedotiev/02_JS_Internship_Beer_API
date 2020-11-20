@@ -16,6 +16,7 @@ window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 
 const render = (state) => {
   const { favorites, pickedBeerItem } = state;
+
   beersList.render(state);
   recentSearches.render(state.searchItems);
   beerSearchForm.render(state);

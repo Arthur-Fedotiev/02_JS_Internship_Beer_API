@@ -1,14 +1,13 @@
+import CONSTANT from "../../constants.js";
+
 export default ({ target, store, actionCreators }) => {
   const { addToFavorites, deleteFromFavorites } = actionCreators;
-  const addItemToFavorites = target.dataset.favorite === "add";
+  const addItemToFavorites =
+    target.dataset.favorite === CONSTANT.ADD_TO_FAVORITES;
 
-  if (addItemToFavorites) {
-    store.dispatch(addToFavorites(target.id));
-  }
-
-  if (!addItemToFavorites) {
-    store.dispatch(deleteFromFavorites(target.id));
-  }
+  addItemToFavorites
+    ? store.dispatch(addToFavorites(target.id))
+    : store.dispatch(deleteFromFavorites(target.id));
 
   document.getElementById("searchInput").value = "";
 };
