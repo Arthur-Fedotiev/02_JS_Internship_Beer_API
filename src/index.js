@@ -8,6 +8,7 @@ import {
 } from "./BreweryPage/breweryPageMarkupComponents.js";
 import breweryStore from "./BreweryPage/BreweryStore.js";
 import breweryEventHandler from "./BreweryPage/BreweryEventHandler.js";
+import { updateLocalStorage } from "../utils/localStorage.js";
 
 document.addEventListener("submit", breweryEventHandler.handleSubmit);
 document.addEventListener("click", breweryEventHandler.handleClick);
@@ -15,10 +16,11 @@ document.addEventListener("keydown", breweryEventHandler.handleKeydown);
 window.addEventListener("scroll", scrollTopArrow.showScrollBtn);
 
 const render = (state) => {
-  const { favorites, pickedBeerItem } = state;
+  const { favorites, pickedBeerItem, searchItems } = state;
 
+  updateLocalStorage(searchItems, favorites);
   beersList.render(state);
-  recentSearches.render(state.searchItems);
+  recentSearches.render(searchItems);
   beerSearchForm.render(state);
   modalFavorites.render(favorites);
   modalBeerItem.render(pickedBeerItem, favorites);

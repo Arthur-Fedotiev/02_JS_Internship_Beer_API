@@ -1,16 +1,22 @@
 import ReduceStore from "../../flux/ReduceStore.js";
 import breweryReducer from "./breweryReducer.js";
+import {
+  getLocalStorage,
+  setInitialLocalStorage,
+} from "../../utils/localStorage.js";
+
+setInitialLocalStorage();
 
 class BreweryStore extends ReduceStore {
   setInitialState() {
     return {
       beerItems: [],
-      searchItems: [],
+      searchItems: getLocalStorage().recentSearches,
       err: {},
       currentPage: 1,
       searchQuery: "",
       loading: false,
-      favorites: [],
+      favorites: getLocalStorage().favorites,
       pickedBeerItem: {},
     };
   }
