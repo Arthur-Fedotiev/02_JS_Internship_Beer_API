@@ -3,7 +3,7 @@ import { getBeers } from "../../../utils/api.js";
 import { isEmpty } from "../../../utils/validate.js";
 import { scrollToFirstItem } from "../../../utils/scroll.js";
 
-export default async (target, store, actionCreators) => {
+export default async ({ target, store, actionCreators }) => {
   const {
     toggleLoading,
     setSearchQuery,

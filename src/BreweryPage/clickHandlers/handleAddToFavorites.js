@@ -1,4 +1,4 @@
-export default (target, store, actionCreators) => {
+export default ({ target, store, actionCreators }) => {
   const { addToFavorites, deleteFromFavorites } = actionCreators;
   const addItemToFavorites = target.dataset.favorite === "add";
 

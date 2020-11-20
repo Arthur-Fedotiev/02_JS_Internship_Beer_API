@@ -18,10 +18,8 @@ export default class ModalBeerItem {
 </div>`;
   }
 
-  toggleModal(show, delay = 0) {
-    setTimeout(() => {
-      this.container.style.display = show ? "block" : "none";
-    }, delay);
+  toggleModal(show) {
+    this.container.style.display = show ? "block" : "none";
   }
 
   isFavorite(id, favorites) {

@@ -1,6 +1,6 @@
 import { scrollToFirstItem } from "../../../../../utils/scroll.js";
 
-export default (store, actionCreators, query, receivedBeerItems) => {
+export default ({ store, actionCreators, query, receivedBeerItems }) => {
   const {
     handleDelete,
     handleError,

@@ -88,6 +88,12 @@ export default class BeersList {
       </div>`;
   }
 
+  handleServerResponse(isEmptyResponse, state) {
+    return isEmptyResponse
+      ? this.errorMessageToHTML(state.err["emptyResponse"])
+      : this.beerContainerToHTML(state);
+  }
+
   render(state) {
     const isEmptyResponse = !!state.err["emptyResponse"];
     const showWelcomePage = isEmpty(state.beerItems) && !isEmptyResponse;
@@ -95,8 +101,6 @@ export default class BeersList {
     this.container.innerHTML =
       showWelcomePage && !state.loading
         ? this.greeterToHTML()
-        : isEmptyResponse
-        ? this.errorMessageToHTML(state.err["emptyResponse"])
-        : this.beerContainerToHTML(state);
+        : this.handleServerResponse(isEmptyResponse, state);
   }
 }

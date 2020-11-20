@@ -24,7 +24,7 @@ export class BreweryEventHandler extends EventHandler {
 
   handleClick = async ({ target }) => {
     if (!!target.dataset.searchQuery) {
-      handleSearchQuery(target, this.store, actionCreators);
+      handleSearchQuery({ target, store: this.store, actionCreators });
     }
 
     if (target.id === "loadMore") {
@@ -36,7 +36,7 @@ export class BreweryEventHandler extends EventHandler {
     }
 
     if (!!target.dataset.favorite) {
-      handleAddToFavorites(target, this.store, actionCreators);
+      handleAddToFavorites({ target, store: this.store, actionCreators });
     }
 
     if (target.id === "favoriteBtn") {
@@ -59,7 +59,11 @@ export class BreweryEventHandler extends EventHandler {
     e.preventDefault();
 
     if (e.target.name === "searchForm") {
-      handleSearchSubmit(e.target, this.store, actionCreators);
+      handleSearchSubmit({
+        target: e.target,
+        store: this.store,
+        actionCreators,
+      });
     }
   };
 
