@@ -82,7 +82,7 @@ export default class BeersList {
 
   greeterToHTML() {
     return `<div class="jumbotron">
-    <h1 class="display-4 text-warning text-center bold">Greeting Traveler!</h1>
+    <h1 class="display-4 text-warning text-center bold">Greetings Traveler!</h1>
     <p class="lead text-center mt-2">Don't be shy and take a look at what we've got!</p>
     <hr class="my-4">
       </div>`;

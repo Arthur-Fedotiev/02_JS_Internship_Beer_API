@@ -64,7 +64,7 @@ export class BreweryEventHandler extends EventHandler {
   };
 
   handleKeydown = (e) => {
-    if (e.keyCode !== CONSTANT.ESCAPE_CODE) return;
+    if (e.code !== CONSTANT.ESCAPE_KEY) return;
 
     modalFavorites.toggleModal(false);
     modalBeerItem.toggleModal(false);
