@@ -1,5 +1,5 @@
 import ReduceStore from "../../flux/ReduceStore.js";
-import breweryReducer from "./breweryReducer.js";
+import breweryReducer from "./BreweryReducer.js";
 import {
   getLocalStorage,
   setInitialLocalStorage,

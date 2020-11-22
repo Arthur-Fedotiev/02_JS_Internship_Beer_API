@@ -5,7 +5,7 @@ import {
   scrollTopArrow,
   modalFavorites,
   modalBeerItem,
-} from "./BreweryPage/breweryPageMarkupComponents.js";
+} from "./BreweryPage/BreweryPageMarkupComponents.js";
 import breweryStore from "./BreweryPage/BreweryStore.js";
 import breweryEventHandler from "./BreweryPage/BreweryEventHandler.js";
 import { updateLocalStorage } from "../utils/localStorage.js";
