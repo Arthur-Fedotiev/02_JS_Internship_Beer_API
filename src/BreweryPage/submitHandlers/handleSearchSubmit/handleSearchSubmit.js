@@ -11,6 +11,9 @@ export default async (data) => {
 
   if (target.name === CONSTANT.SEARCH_FORM) {
     const err = initialValidation(data);
+    
+    if (searchQuery && err["searchQuery"])
+      store.dispatch(setSearchQuery(searchQuery));
 
     if (!err["searchQuery"]) {
       try {
